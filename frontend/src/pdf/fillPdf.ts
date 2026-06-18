@@ -287,7 +287,7 @@ function fmtDate(iso?: string): string {
 
 export async function exportPdf(bundle: Bundle, visit: any) {
   const bytes = await fillTemplate(bundle, visit);
-  const blob = new Blob([bytes], { type: 'application/pdf' });
+  const blob = new Blob([bytes as BlobPart], { type: 'application/pdf' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = buildFilename(bundle);
@@ -297,7 +297,7 @@ export async function exportPdf(bundle: Bundle, visit: any) {
 
 export async function previewPdf(bundle: Bundle, visit: any) {
   const bytes = await fillTemplate(bundle, visit);
-  const blob = new Blob([bytes], { type: 'application/pdf' });
+  const blob = new Blob([bytes as BlobPart], { type: 'application/pdf' });
   const url = URL.createObjectURL(blob);
   window.open(url, '_blank', 'noopener,noreferrer');
   setTimeout(() => URL.revokeObjectURL(url), 60_000);
@@ -305,7 +305,7 @@ export async function previewPdf(bundle: Bundle, visit: any) {
 
 export async function printPdf(bundle: Bundle, visit: any) {
   const bytes = await fillTemplate(bundle, visit);
-  const blob = new Blob([bytes], { type: 'application/pdf' });
+  const blob = new Blob([bytes as BlobPart], { type: 'application/pdf' });
   const url = URL.createObjectURL(blob);
   const iframe = document.createElement('iframe');
   iframe.style.position = 'fixed';

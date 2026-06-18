@@ -14,7 +14,9 @@ export const PAGE_SIZE = {
   5: { w: 595.3, h: 841.9 }
 } as const;
 
-export const FONT_SIZE = { default: 9.5, small: 8, signature_label: 9 } as const;
+export const FONT_SIZE: { default: number; small: number; signature_label: number } = {
+  default: 9.5, small: 8, signature_label: 9
+};
 export const CHECK_GLYPH = '✔';
 
 export const PAGE1 = {
