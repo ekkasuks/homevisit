@@ -34,7 +34,11 @@ const Photos = {
     const bytes = Utilities.base64Decode(base64_data);
     const blob  = Utilities.newBlob(bytes, mime_type, photo_type + '_' + Date.now() + '_' + filename);
     const file  = folder.createFile(blob);
-    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    try {
+      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    } catch (shareErr) {
+      Logger.log('setSharing skipped: ' + shareErr.message);
+    }
 
     return Utils.insert(CONFIG.SHEETS.PHOTOS, {
       photo_id: Utils.uuid(),
