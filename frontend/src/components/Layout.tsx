@@ -1,11 +1,12 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../store/auth';
-import { LayoutDashboard, Users, BarChart3, Settings, LogOut, Menu } from 'lucide-react';
+import { LayoutDashboard, Users, BarChart3, Settings, LogOut, Menu, Upload } from 'lucide-react';
 import { useState } from 'react';
 
 const nav = [
   { to: '/',         label: 'แดชบอร์ด',       icon: LayoutDashboard },
   { to: '/students', label: 'รายชื่อนักเรียน', icon: Users },
+  { to: '/import',   label: 'นำเข้าข้อมูล DMC', icon: Upload },
   { to: '/reports',  label: 'รายงาน',         icon: BarChart3 },
   { to: '/settings', label: 'ตั้งค่า',        icon: Settings }
 ];

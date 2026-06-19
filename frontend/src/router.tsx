@@ -8,6 +8,7 @@ import StudentDetail from './pages/StudentDetail';
 import HomeVisitForm from './pages/HomeVisitForm';
 import Reports from './pages/Reports';
 import SettingsPage from './pages/Settings';
+import ImportStudents from './pages/ImportStudents';
 
 const router = createBrowserRouter([
   { path: '/pin', element: <PinPage /> },
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
         { path: '/students/:id',              element: <StudentDetail /> },
         { path: '/students/:id/visit/new',    element: <HomeVisitForm /> },
         { path: '/students/:id/visit/:vid',   element: <HomeVisitForm /> },
+        { path: '/import',                    element: <ImportStudents /> },
         { path: '/reports',                   element: <Reports /> },
         { path: '/settings',                  element: <SettingsPage /> }
       ]
