@@ -105,6 +105,12 @@ async function renderHtml(bundle: Bundle, visit: any): Promise<string> {
   const injection = `
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap');
+@page { size: A4 landscape; margin: 0; }
+@media print {
+  body { margin: 0 !important; background: #fff !important; }
+  .page { margin: 0 !important; box-shadow: none !important; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+}
 .page { position:relative !important; }
 </style>
 <script>
