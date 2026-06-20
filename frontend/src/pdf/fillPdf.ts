@@ -3,7 +3,7 @@ import { embedThaiFont } from './fontLoader';
 import { PAGE1, PAGE2, PAGE3, PAGE4, PAGE5, FONT_SIZE } from './coordinates';
 import { text, textRight, check, image, DrawCtx } from './drawHelpers';
 
-const TEMPLATE_URL = import.meta.env.VITE_PDF_TEMPLATE || '/template.pdf';
+const TEMPLATE_URL = (import.meta.env.BASE_URL || '/') + 'template.pdf';
 const DEBUG = import.meta.env.VITE_PDF_DEBUG === '1';
 
 interface Bundle {
