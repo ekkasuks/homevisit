@@ -1,6 +1,7 @@
 import { PDFDocument, PDFFont, PDFPage, rgb } from 'pdf-lib';
 import type { Point, BoxRect } from './coordinates';
 import { CHECK_GLYPH, FONT_SIZE } from './coordinates';
+import { Photos } from '../api/photos';
 
 export interface DrawCtx { doc: PDFDocument; font: PDFFont; debug?: boolean }
 
@@ -38,14 +39,23 @@ export async function image(
   if (!url) return;
   try {
     let bytes: ArrayBuffer;
+    let actualMime = mime;
     if (url.startsWith('data:')) {
       const base64 = url.split(',')[1];
       bytes = base64ToArrayBuffer(base64);
     } else {
-      const res = await fetch(url, { mode: 'cors' });
-      bytes = await res.arrayBuffer();
+      const m = url.match(/[?&]id=([^&]+)/);
+      const fileId = m ? m[1] : null;
+      if (fileId) {
+        const data = await Photos.fetch(fileId);
+        bytes = base64ToArrayBuffer(data.base64);
+        actualMime = data.mime_type.includes('png') ? 'png' : 'jpg';
+      } else {
+        const res = await fetch(url, { mode: 'cors' });
+        bytes = await res.arrayBuffer();
+      }
     }
-    const embedded = mime === 'png'
+    const embedded = actualMime === 'png'
       ? await ctx.doc.embedPng(bytes)
       : await ctx.doc.embedJpg(bytes);
     const scaled = fit(embedded.width, embedded.height, box.w, box.h);

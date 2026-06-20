@@ -4,6 +4,7 @@ const Photos = {
       case 'list':   return Utils.list(CONFIG.SHEETS.PHOTOS).filter(r => r.student_id === (params.student_id || body.student_id));
       case 'upload': return this.upload(body);
       case 'delete': return this.remove(body.id);
+      case 'fetch':  return this.fetchAsBase64(params.id || body.id);
       default: throw new Error('UNKNOWN_ACTION');
     }
   },
@@ -52,6 +53,14 @@ const Photos = {
       file_size_bytes: bytes.length,
       mime_type: mime_type
     });
+  },
+
+  fetchAsBase64(fileId) {
+    const blob = DriveApp.getFileById(fileId).getBlob();
+    return {
+      mime_type: blob.getContentType(),
+      base64: Utilities.base64Encode(blob.getBytes())
+    };
   },
 
   remove(id) {
