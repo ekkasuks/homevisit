@@ -11,7 +11,10 @@
       "Bash(/opt/homebrew/bin/python3)",
       "Bash(/opt/homebrew/bin/npm install *)",
       "Bash(git check-ignore *)",
-      "Bash(/opt/homebrew/bin/npm run *)"
+      "Bash(/opt/homebrew/bin/npm run *)",
+      "Bash(curl -sL \"https://github.com/google/fonts/raw/main/ofl/sarabun/Sarabun-Regular.ttf\" -o /tmp/sarabun.ttf -w \"size=%{size_download} status=%{http_code}\\\\n\")",
+      "Read(//tmp/**)",
+      "Bash(cp /tmp/sarabun.ttf /Users/eakkasakpreetiprasong/Desktop/homevisit/frontend/public/fonts/Sarabun-Regular.ttf && ls -la /Users/eakkasakpreetiprasong/Desktop/homevisit/frontend/public/fonts/)"
     ]
   }
 }
