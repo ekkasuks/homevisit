@@ -7,46 +7,45 @@ export type Point = { page: number; x: number; y: number };
 export type BoxRect = { page: number; x: number; y: number; w: number; h: number };
 
 export const FONT_SIZE: { default: number; small: number } = { default: 9.5, small: 8 };
-export const CHECK_GLYPH = '✔';
 
 export const PAGE1 = {
-  school_name:        { page: 1, x: 270, y: 487.5 } as Point,
-  school_affiliation: { page: 1, x: 510, y: 487.5 } as Point,
+  school_name:        { page: 1, x: 270, y: 492 } as Point,
+  school_affiliation: { page: 1, x: 510, y: 492 } as Point,
   student_photo:      { page: 1, x: 736, y: 460, w: 70, h: 90 } as BoxRect,
 
-  first_name:  { page: 1, x: 168, y: 467.6 } as Point,
-  last_name:   { page: 1, x: 333, y: 467.6 } as Point,
-  grade_level: { page: 1, x: 491, y: 467.6 } as Point,
-  citizen_id:  { page: 1, x: 217, y: 447.9 } as Point,
+  first_name:  { page: 1, x: 168, y: 472 } as Point,
+  last_name:   { page: 1, x: 333, y: 472 } as Point,
+  grade_level: { page: 1, x: 491, y: 472 } as Point,
+  citizen_id:  { page: 1, x: 217, y: 452 } as Point,
 
   family_status: {
-    parents_together:  { page: 1, x: 178, y: 428.2 } as Point,
-    parents_separated: { page: 1, x: 256, y: 428.2 } as Point,
-    parents_divorced:  { page: 1, x: 343, y: 428.2 } as Point,
-    father_deceased:   { page: 1, x: 430, y: 428.2 } as Point,
-    mother_deceased:   { page: 1, x: 525, y: 428.2 } as Point,
-    both_deceased:     { page: 1, x: 620, y: 428.2 } as Point,
-    abandoned:         { page: 1, x: 740, y: 428.2 } as Point
+    parents_together:  { page: 1, x: 178, y: 433 } as Point,
+    parents_separated: { page: 1, x: 256, y: 433 } as Point,
+    parents_divorced:  { page: 1, x: 343, y: 433 } as Point,
+    father_deceased:   { page: 1, x: 430, y: 433 } as Point,
+    mother_deceased:   { page: 1, x: 525, y: 433 } as Point,
+    both_deceased:     { page: 1, x: 620, y: 433 } as Point,
+    abandoned:         { page: 1, x: 740, y: 433 } as Point
   } as Record<string, Point>,
 
   lives_with: {
-    parents:            { page: 1, x: 192, y: 407.3 } as Point,
-    relatives:          { page: 1, x: 261, y: 407.3 } as Point,
-    alone:              { page: 1, x: 314, y: 407.3 } as Point,
-    caregiver_employer: { page: 1, x: 392, y: 407.3 } as Point,
-    institution:        { page: 1, x: 490, y: 407.3 } as Point
+    parents:            { page: 1, x: 192, y: 412 } as Point,
+    relatives:          { page: 1, x: 261, y: 412 } as Point,
+    alone:              { page: 1, x: 314, y: 412 } as Point,
+    caregiver_employer: { page: 1, x: 392, y: 412 } as Point,
+    institution:        { page: 1, x: 490, y: 412 } as Point
   } as Record<string, Point>,
 
-  guardian_first_name:        { page: 1, x: 175, y: 386.3 } as Point,
-  guardian_last_name:         { page: 1, x: 308, y: 386.3 } as Point,
-  guardian_relationship:      { page: 1, x: 510, y: 386.3 } as Point,
-  guardian_highest_education: { page: 1, x: 663, y: 386.3 } as Point,
-  guardian_occupation:        { page: 1, x:  92, y: 366.8 } as Point,
-  guardian_phone:             { page: 1, x: 343, y: 366.8 } as Point,
-  guardian_citizen_id:        { page: 1, x: 580, y: 366.8 } as Point,
-  no_citizen_id:              { page: 1, x: 564, y: 347.1 } as Point,
-  has_state_welfare:          { page: 1, x:  56, y: 327.4 } as Point,
-  household_size:             { page: 1, x: 196, y: 310.0 } as Point,
+  guardian_first_name:        { page: 1, x: 175, y: 391 } as Point,
+  guardian_last_name:         { page: 1, x: 308, y: 391 } as Point,
+  guardian_relationship:      { page: 1, x: 510, y: 391 } as Point,
+  guardian_highest_education: { page: 1, x: 663, y: 391 } as Point,
+  guardian_occupation:        { page: 1, x:  92, y: 371 } as Point,
+  guardian_phone:             { page: 1, x: 343, y: 371 } as Point,
+  guardian_citizen_id:        { page: 1, x: 580, y: 371 } as Point,
+  no_citizen_id:              { page: 1, x: 564, y: 351 } as Point,
+  has_state_welfare:          { page: 1, x:  56, y: 332 } as Point,
+  household_size:             { page: 1, x: 196, y: 314 } as Point,
 
   table_rows_page1: {
     first_y: 222,

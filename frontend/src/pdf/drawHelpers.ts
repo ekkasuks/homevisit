@@ -1,6 +1,6 @@
-import { PDFDocument, PDFFont, PDFPage } from 'pdf-lib';
+import { PDFDocument, PDFFont, PDFPage, rgb } from 'pdf-lib';
 import type { Point, BoxRect } from './coordinates';
-import { CHECK_GLYPH, FONT_SIZE } from './coordinates';
+import { FONT_SIZE } from './coordinates';
 import { Photos } from '../api/photos';
 
 export interface DrawCtx { doc: PDFDocument; font: PDFFont; }
@@ -26,7 +26,10 @@ export function textRight(ctx: DrawCtx, pt: Point, value: any, size = FONT_SIZE.
 export function check(ctx: DrawCtx, pt: Point | null | undefined, on: any) {
   if (!pt || !on) return;
   const p = page(ctx, pt.page);
-  p.drawText(CHECK_GLYPH, { x: pt.x, y: pt.y, size: 11, font: ctx.font });
+  const black = rgb(0, 0, 0);
+  // วาดเครื่องหมายถูก ✓ ด้วยเส้นสองเส้น
+  p.drawLine({ start: { x: pt.x, y: pt.y + 3 }, end: { x: pt.x + 3, y: pt.y }, thickness: 1.5, color: black, opacity: 1 });
+  p.drawLine({ start: { x: pt.x + 3, y: pt.y }, end: { x: pt.x + 9, y: pt.y + 7 }, thickness: 1.5, color: black, opacity: 1 });
 }
 
 export async function image(
