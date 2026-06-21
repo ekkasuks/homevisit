@@ -65,6 +65,29 @@ function fillPage2(ctx: DrawCtx, b: Bundle) {
   const s = b.student || {};
   textRight(ctx, PAGE2.sum_total_income, fmt(s.total_household_income));
   textRight(ctx, PAGE2.sum_income_per_cap, fmt(s.income_per_capita));
+
+  // Section 3.1 – ภาระพึ่งพิง (อยู่ท้าย PDF page 2)
+  const h = b.household_status || {};
+  if (h.has_dependency_burden !== undefined && h.has_dependency_burden !== null && h.has_dependency_burden !== '') {
+    check(ctx, h.has_dependency_burden ? PAGE2.dep_burden_yes : PAGE2.dep_burden_no, true);
+  }
+  check(ctx, PAGE2.dep_disability,       h.dep_disability);
+  check(ctx, PAGE2.dep_chronic_disease,  h.dep_chronic_disease);
+  check(ctx, PAGE2.dep_elderly_60plus,   h.dep_elderly_60plus);
+  check(ctx, PAGE2.dep_single_parent,    h.dep_single_parent);
+  check(ctx, PAGE2.dep_unemployed_15_65, h.dep_unemployed_15_65);
+
+  // Section 3.2 – การอยู่อาศัย
+  if (h.housing_type) {
+    const housingMap: Record<string, any> = {
+      own:         PAGE2.housing_own,
+      rent:        PAGE2.housing_rent,
+      with_others: PAGE2.housing_with_others,
+      dorm:        PAGE2.housing_dorm,
+    };
+    check(ctx, housingMap[h.housing_type], true);
+    if (h.housing_type === 'rent') text(ctx, PAGE2.rent_amount, fmt(h.rent_amount));
+  }
 }
 
 function drawTableRows(ctx: DrawCtx, members: any[], firstY: number, pitch: number, cols: any, startRowNo: number) {
@@ -90,30 +113,25 @@ function drawTableRows(ctx: DrawCtx, members: any[], firstY: number, pitch: numb
 }
 
 function fillPage3(ctx: DrawCtx, b: Bundle) {
+  // Section 3.3 – 3.8 + 4 อยู่บน PDF page 3 (A4 portrait)
   const h = b.household_status || {};
-  check(ctx, h.has_dependency_burden ? PAGE3.dep_burden_yes : PAGE3.dep_burden_no, true);
-  check(ctx, PAGE3.dep_disability, h.dep_disability);
-  check(ctx, PAGE3.dep_chronic_disease, h.dep_chronic_disease);
-  check(ctx, PAGE3.dep_elderly_60plus, h.dep_elderly_60plus);
-  check(ctx, PAGE3.dep_single_parent, h.dep_single_parent);
-  check(ctx, PAGE3.dep_unemployed_15_65, h.dep_unemployed_15_65);
+  const def = (v: any) => v !== undefined && v !== null && v !== '';
 
-  const housingMap: any = {
-    own: PAGE3.housing_own, rent: PAGE3.housing_rent,
-    with_others: PAGE3.housing_with_others, dorm: PAGE3.housing_dorm
-  };
-  check(ctx, housingMap[h.housing_type], true);
-  if (h.housing_type === 'rent') text(ctx, PAGE3.rent_amount, fmt(h.rent_amount));
+  if (def(h.has_toilet))
+    check(ctx, h.has_toilet ? PAGE3.has_toilet_yes : PAGE3.has_toilet_no, true);
+  if (def(h.does_farming))
+    check(ctx, h.does_farming ? PAGE3.yes_farming : PAGE3.no_farming, true);
+  if (def(h.has_electricity))
+    check(ctx, h.has_electricity ? PAGE3.has_electricity : PAGE3.no_electricity, true);
+  if (def(h.has_vehicle))
+    check(ctx, h.has_vehicle ? PAGE3.has_vehicle : PAGE3.no_vehicle, true);
+  if (def(h.has_appliances))
+    check(ctx, h.has_appliances ? PAGE3.has_appliances : PAGE3.no_appliances, true);
 
-  check(ctx, h.has_toilet ? PAGE3.has_toilet_yes : PAGE3.has_toilet_no, true);
-  check(ctx, h.does_farming ? PAGE3.yes_farming : PAGE3.no_farming, true);
-  check(ctx, h.has_electricity ? PAGE3.has_electricity : PAGE3.no_electricity, true);
-  check(ctx, h.has_vehicle ? PAGE3.has_vehicle : PAGE3.no_vehicle, true);
-  check(ctx, h.has_appliances ? PAGE3.has_appliances : PAGE3.no_appliances, true);
-
-  text(ctx, PAGE3.institution_name, h.institution_name);
+  text(ctx, PAGE3.institution_name,     h.institution_name);
   text(ctx, PAGE3.institution_province, h.institution_province);
-  check(ctx, h.institution_wants_subsidy ? PAGE3.inst_wants_yes : PAGE3.inst_wants_no, true);
+  if (def(h.institution_wants_subsidy))
+    check(ctx, h.institution_wants_subsidy ? PAGE3.inst_wants_yes : PAGE3.inst_wants_no, true);
 }
 
 function fillPage4(ctx: DrawCtx, b: Bundle, v: any) {
@@ -156,8 +174,8 @@ async function fillPage5(ctx: DrawCtx, b: Bundle, v: any) {
   text(ctx, PAGE5.officer_name, v.officer_name);
   text(ctx, PAGE5.officer_citizen_id, v.officer_citizen_id);
   text(ctx, PAGE5.officer_position, v.officer_position);
-  check(ctx, PAGE5.officer_certifies, v.officer_certifies === true);
-  check(ctx, PAGE5.officer_rejects, v.officer_certifies === false);
+  if (v.officer_certifies === true) check(ctx, PAGE5.officer_certifies, true);
+  if (v.officer_certifies === false) check(ctx, PAGE5.officer_rejects, true);
   text(ctx, PAGE5.officer_reject_reason, v.officer_reject_reason);
   await image(ctx, PAGE5.sig_officer, v.officer_signature_url, 'png');
 

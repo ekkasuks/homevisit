@@ -42,7 +42,8 @@ export async function image(
     if (url.startsWith('data:')) {
       bytes = base64ToArrayBuffer(url.split(',')[1]);
     } else {
-      const m = url.match(/[?&]id=([^&]+)/);
+      // รองรับทั้ง ?id=XXX, &id=XXX และ /d/XXX/
+      const m = url.match(/[?&]id=([^&]+)/) || url.match(/\/d\/([^/]+)\//);
       const fileId = m ? m[1] : null;
       if (fileId) {
         const data = await Photos.fetch(fileId);

@@ -15,7 +15,8 @@
       "Bash(curl -sL \"https://github.com/google/fonts/raw/main/ofl/sarabun/Sarabun-Regular.ttf\" -o /tmp/sarabun.ttf -w \"size=%{size_download} status=%{http_code}\\\\n\")",
       "Read(//tmp/**)",
       "Bash(cp /tmp/sarabun.ttf /Users/eakkasakpreetiprasong/Desktop/homevisit/frontend/public/fonts/Sarabun-Regular.ttf && ls -la /Users/eakkasakpreetiprasong/Desktop/homevisit/frontend/public/fonts/)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(pip3 install *)"
     ]
   }
 }
